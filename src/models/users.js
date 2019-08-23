@@ -1,4 +1,4 @@
-const mongoose = require('../database');
+const mongoose = require('../database/connectDb');
 //const mongoose = require('mongose');
 
 const userSchema = new mongoose.Schema({

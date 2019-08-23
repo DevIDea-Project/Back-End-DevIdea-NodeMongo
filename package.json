@@ -7,12 +7,13 @@
     "eslint": "eslint src/** --fix",
     "start": "nodemon src/server.js",
     "test": "jest",
-     "secure-mode": "jest --watch --verbose=true"
+    "secure-mode": "jest --watch --verbose=true"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "consign": "^0.1.6",
     "express": "^4.17.1",

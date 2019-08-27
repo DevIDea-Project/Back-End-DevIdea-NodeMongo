@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 
 const User = require('../models/users');
-const authConfig = require('../config/auth')
+const authConfig = require('../config/auth');
 
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
     return res.send({ 
       user,
       token: generateToken({ id: user.id }),
-    })
+    });
   } 
   catch (err) {
     return res.status(400).send({ error: 'Falha ao enviar usuario!' });
@@ -49,13 +49,11 @@ router.post('/authenticate', async (req, res) =>{
 
   user.password = undefined;
 
-  
-
   res.send({ 
     user, 
-    token: generateToken({ id: user.id })
+    token: generateToken({ id: user.id }),
   });
 
 });
 
-module.exports = (app) => app.use('/auth', router);
+module.exports = app => app.use('/auth', router);

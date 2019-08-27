@@ -6,6 +6,7 @@ const app = express();
 consign({ cwd: 'src', verbose: false })
   .include('./config/middlewares.js')
   .then('./controllers')
+  .then('./middleware/auth')
   .then('./database')
   .then('./models/users')
   .into(app);

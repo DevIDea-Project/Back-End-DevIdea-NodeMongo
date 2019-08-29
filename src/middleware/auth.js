@@ -21,7 +21,10 @@ module.exports = (req, res, next) => {
   jwt.verify(token, authConfig.secret, (err, decoded) => {
     if (err) return res.status(401).send({ error: 'Token Invalido' })
 
-    req.user.id = decoded.id;
+    /** Estava ocasionando erro, pelo fato de está colocando: req.user.id = decoded.id. Quando
+     * o correto é: req.userId = decoded.id (req.userId é uma variavel).
+     */
+    req.userId = decoded.id;
     return next();
   })
 };

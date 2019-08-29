@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(authControle);
 
 router.get('/', (req, res) => {
-  res.send({ ok: true });
+  res.send({ Message: 'Validação de Token, Ok!' });
 })
 
 module.exports = app => app.use('/controle', router);

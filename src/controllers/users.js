@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const mailer = require('../modules/mailer');
 
 
 const User = require('../models/users');
@@ -65,18 +66,31 @@ router.post('/forgot_password', async (req, res) => {
 
     if(!user) return res.status(400).send({ error: 'Usuario não existe!' });
     
-    const token = crypto.randomByres(20).toString('hex');
+    const token = crypto.randomBytes(20).toString('hex');
     
     const now = new Date();
-
     now.setHours(now.getHours() + 1);
 
     await User.findByIdAndUpdate(user.id, {
       '$set':{
         passwordResetToken: token,
-        passwordResetExpires, now
+        passwordResetExpires: now,
       }
-    })
+    });
+
+    //console.log('token: '+token, 'Data: '+now)
+
+    mailer.sendMail({
+      to: email,
+      from: 'andreFelipe@gmail.com',
+      template: 'auth/forgot_password',
+      context: { token },
+    }, (err) => {
+        if(err) 
+        return res.status(400).send({error: 'Erro no Token'});
+
+      return res.send();
+    });
 
   } catch (err) {
     res.status(400).send({ error: 'Erro on forgot password, try again!' })

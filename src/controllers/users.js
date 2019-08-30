@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 
 const User = require('../models/users');
@@ -54,6 +55,32 @@ router.post('/authenticate', async (req, res) =>{
     token: generateToken({ id: user.id }),
   });
 
+});
+
+router.post('/forgot_password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if(!user) return res.status(400).send({ error: 'Usuario não existe!' });
+    
+    const token = crypto.randomByres(20).toString('hex');
+    
+    const now = new Date();
+
+    now.setHours(now.getHours() + 1);
+
+    await User.findByIdAndUpdate(user.id, {
+      '$set':{
+        passwordResetToken: token,
+        passwordResetExpires, now
+      }
+    })
+
+  } catch (err) {
+    res.status(400).send({ error: 'Erro on forgot password, try again!' })
+  }
 });
 
 module.exports = app => app.use('/auth', router);

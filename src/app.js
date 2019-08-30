@@ -10,7 +10,7 @@ consign({ cwd: 'src', verbose: false })
   .then('./database')
   .then('./models/users')
   .then('modules')
-  .then('resources')
+  .then('resources/mail/auth/forgot_password')
   .into(app);
 
 app.get('/', (req, res) => {

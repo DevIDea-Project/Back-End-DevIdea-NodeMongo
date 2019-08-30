@@ -9,6 +9,8 @@ consign({ cwd: 'src', verbose: false })
   .then('./middleware/auth')
   .then('./database')
   .then('./models/users')
+  .then('modules')
+  .then('resources')
   .into(app);
 
 app.get('/', (req, res) => {

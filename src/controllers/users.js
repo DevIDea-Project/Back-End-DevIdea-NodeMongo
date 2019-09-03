@@ -78,22 +78,21 @@ router.post('/forgot_password', async (req, res) => {
       }
     });
 
-    //console.log('token: '+token, 'Data: '+now)
-
     mailer.sendMail({
       to: email,
-      from: 'andreFelipe@gmail.com',
+      from: 'brunoviniciustica@gmail.com',
       template: 'auth/forgot_password',
       context: { token },
     }, (err) => {
         if(err) 
         return res.status(400).send({error: 'Erro no Token'});
-
+      
       return res.send();
     });
 
   } catch (err) {
-    res.status(400).send({ error: 'Erro on forgot password, try again!' })
+    console.log(err);
+    res.status(400).send({ error: 'Error on forgot password, try again!' })
   }
 });
 

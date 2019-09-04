@@ -86,12 +86,12 @@ router.post('/forgot_password', async (req, res) => {
     }, (err) => {
         if(err) 
         return res.status(400).send({error: 'Erro no Token'});
-      
+     
       return res.send();
     });
 
   } catch (err) {
-    console.log(err);
+     console.log(err);
     res.status(400).send({ error: 'Error on forgot password, try again!' })
   }
 });

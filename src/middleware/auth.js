@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.json');
 
+/** Nesse metodo eu estou exportando justamente a autenticação do token.
+ * Importo o module: jsonwebtoken e tambem importo o secret que esta no caminho:
+ * ../ config / auth.json. Assim eu vou fazendo algumas validações com o uso do token.
+ * e ao final exporto para que ele possa ser usado.
+ */
 module.exports = (req, res, next) => {
 
   const authHeader = req.headers.authorization;

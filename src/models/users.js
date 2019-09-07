@@ -1,9 +1,5 @@
 const mongoose = require('../models/connectDb');
 const bcrypt = require('bcryptjs');
-/** Este require abaixo não vai ser mais necessario, pelo fato de logo em cima,
- *  eu importei o proprio banco que está dentro da pasta database e o arquivo dentro dele.
- */
-//const mongoose = require('mongose');
 
 const UserSchema = new mongoose.Schema({
   name: { type: String, require: true, },

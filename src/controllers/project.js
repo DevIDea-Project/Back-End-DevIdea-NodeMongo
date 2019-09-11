@@ -17,7 +17,6 @@ router.get('/projects', async (req, res) => {
   }catch(err){
     return res.status(400).send({error:'Não listou os projetos.'})
   }
-
   //res.send({ user: req.userId });
 });
 

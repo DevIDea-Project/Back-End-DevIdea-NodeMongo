@@ -8,6 +8,18 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+router.post('/', async (req, res) => {
+  try {
+
+    //const { title, description, task } = req.body;
+
+    const projects = await Project.create({ ...req.body, user: req.userId });
+    return res.send({ projects });
+  } catch (err) {
+    return res.status(400).send({ error: ' Não listou os projetos!' })
+  }
+});
+
 router.get('/', async (req, res) => {
   try{
     const projects = await Project.find().populate('user');
@@ -26,16 +38,7 @@ router.get('/:projectId', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
-  try{
-    const projects = await Project.create({ ...req.body, user: req.userId });
-    return res.send({ projects });
-  } catch(err){
-    return res.status(400).send({ error: ' Não listou os projetos!' })
-  }
-});
-
-router.put('/projectId', async (req, res) =>{
+router.put('/:projectId', async (req, res) =>{
   res.send({ user: req.userId });
 });
 

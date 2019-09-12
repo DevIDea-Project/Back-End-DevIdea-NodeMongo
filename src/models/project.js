@@ -1,5 +1,4 @@
 const mongoose = require('../models/connectDb');
-//const bcrypt = require('bcryptjs');
 
 const ProjectSchema = new mongoose.Schema({
   title: { type: String, require: true, },
@@ -8,7 +7,7 @@ const ProjectSchema = new mongoose.Schema({
 
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true, },
 
-  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task', }],
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task', require: true, }],
 
   createdAt: { type: Date, dafault: Date.now, }
 });

@@ -1,5 +1,4 @@
 const mongoose = require('../models/connectDb');
-//const bcrypt = require('bcryptjs');
 
 const TaskSchema = new mongoose.Schema({
   title: { type: String, require: true, },
